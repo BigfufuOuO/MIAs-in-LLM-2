@@ -20,8 +20,8 @@ import trl
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM, BitsAndBytesConfig, TrainingArguments, AutoConfig, LlamaTokenizer
 
 import os
-os.environ['HTTP_PROXY'] = 'http://fuwenjie:19990621f@localhost:7890'
-os.environ['HTTPS_PROXY'] = 'http://fuwenjie:19990621f@localhost:7890'
+# os.environ['HTTP_PROXY'] = 'http://fuwenjie:19990621f@localhost:7890'
+# os.environ['HTTPS_PROXY'] = 'http://fuwenjie:19990621f@localhost:7890'
 
 # Load config file
 accelerator = Accelerator()

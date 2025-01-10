@@ -239,6 +239,7 @@ class AttackModel:
     def replace_masks(self, texts):
         cfg = self.cfg
         n_expected = self.count_masks(texts)
+        # print(n_expected)
         stop_id = self.mask_tokenizer.encode(f"<extra_id_{max(n_expected)}>")[0]
         tokens = self.mask_tokenizer(texts, return_tensors="pt", padding=True).to(accelerator.device)
         outputs = self.mask_model.generate(**tokens, max_length=150, do_sample=True, top_p=cfg.mask_top_p,
@@ -287,6 +288,7 @@ class AttackModel:
         while '' in perturbed_texts:
             idxs = [idx for idx, x in enumerate(perturbed_texts) if x == '']
             print(f'WARNING: {len(idxs)} texts have no fills. Trying again [attempt {attempts}].')
+            print(masked_texts, raw_fills)
             masked_texts = [self.tokenize_and_mask(x, cfg.span_length, cfg.pct, idx_rate, cfg.ceil_pct) for idx, x in enumerate(texts) if idx in idxs]
             raw_fills = self.replace_masks(masked_texts)
             extracted_fills = self.extract_fills(raw_fills)

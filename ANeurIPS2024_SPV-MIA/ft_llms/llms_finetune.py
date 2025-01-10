@@ -19,8 +19,8 @@ from attack.utils import create_folder
 from transformers import LlamaTokenizer, get_scheduler
 import os
 
-os.environ['HTTP_PROXY'] = 'http://fuwenjie:19990621f@192.168.75.13:7890'
-os.environ['HTTPS_PROXY'] = 'http://fuwenjie:19990621f@192.168.75.13:7890'
+# os.environ['HTTP_PROXY'] = 'http://fuwenjie:19990621f@192.168.75.13:7890'
+# os.environ['HTTPS_PROXY'] = 'http://fuwenjie:19990621f@192.168.75.13:7890'
 
 from utils import get_logger, constantlengthdatasetiter, print_trainable_parameters
 # trl.trainer.ConstantLengthDataset.__dict__["__iter__"] = constantlengthdatasetiter

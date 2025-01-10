@@ -89,7 +89,7 @@ if not cfg["load_attack_data"]:
     train_dataset = Dataset.from_dict(train_dataset[cfg.train_sta_idx:cfg.train_end_idx])
     valid_dataset = Dataset.from_dict(valid_dataset[cfg.eval_sta_idx:cfg.eval_end_idx])
     train_dataset = Dataset.from_dict(train_dataset[random.sample(range(len(train_dataset["text"])), cfg["maximum_samples"])])
-    valid_dataset = Dataset.from_dict(valid_dataset[random.sample(range(len(valid_dataset["text"])), cfg["maximum_samples"])])
+    valid_dataset = Dataset.from_dict(valid_dataset[random.sample(range(len(valid_dataset["text"])), int(cfg["maximum_samples"] / 4))])
     logger.info("Successfully load datasets!")
 
     # Prepare dataloade
@@ -108,7 +108,7 @@ if not cfg["load_attack_data"]:
     try:
         n_positions = mask_model.config.n_positions
     except AttributeError:
-        n_positions = 512
+        n_positions = 1024 
     mask_tokenizer = AutoTokenizer.from_pretrained(cfg["mask_filling_model_name"], model_max_length=n_positions)
 
     # Prepare everything with accelerator
