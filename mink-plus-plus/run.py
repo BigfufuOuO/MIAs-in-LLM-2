@@ -107,7 +107,7 @@ for i, d in enumerate(tqdm(data, total=len(data), desc='Samples')):
         scores[f'mink_{ratio}'].append(np.mean(topk).item())
     
     ## mink++
-    mink_plus = (token_log_probs - mu) / sigma.sqrt()
+    mink_plus = (token_log_probs - mu) / (sigma.sqrt() + 1e-8) # in case sigma is 0
     for ratio in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
         k_length = int(len(mink_plus) * ratio)
         topk = np.sort(mink_plus.cpu())[:k_length]

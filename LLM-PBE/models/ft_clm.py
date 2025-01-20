@@ -74,7 +74,11 @@ class FinetunedCasualLM(LLMBase):
         # if is_valid_url(model_path):
         #     model_path = download_and_unzip(model_path)
         try: 
-            self._lm = model_cls.from_pretrained(model_path, return_dict=True, device_map='cuda:2', revision=self.model_revision).eval()
+            self._lm = model_cls.from_pretrained(model_path, 
+                                                 return_dict=True, 
+                                                 device_map='cuda:2', 
+                                                 revision=self.model_revision, 
+                                                 torch_dtype=torch.bfloat16).eval()
         except:
             self._lm = model_cls.from_pretrained(model_path, return_dict=True, device_map='cuda:2', revision=self.model_revision, offload_folder='./offload', torch_dtype=torch.bfloat16, low_cpu_mem_usage=True).eval()
 
